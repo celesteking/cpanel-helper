@@ -6,7 +6,7 @@ module CPanelHelper
 			# Displays pertinent information about a specific account.
 			# @param [String] user Username associated with the acount you wish to display.
 			def accountsummary(user)
-				result = call_api(__method__, user)
+				result = call_api(__method__, :user => user)
 
 				raise(RuntimeError, log_err_prefix + result['statusmsg']) if result['status'].nil? or result['status'] != 1
 
