@@ -1,0 +1,35 @@
+
+CPanelHelper is a Ruby library for interaction with [External CPanel XML/JSON API|http://docs.cpanel.net/twiki/bin/view/SoftwareDevelopmentKit/XmlApi] and with [CPanel Internal XML APIv2|http://docs.cpanel.net/twiki/bin/view/SoftwareDevelopmentKit/CallingAPIFunctions].
+
+It also allows local cpanel information retrieval, such as finding user & domain by supplied query string.
+
+== Invoking the API helper
+
+require 'cpanelhelper'
+
+CPanelHelper.configure do |config|
+	config.uri_host = 'https://remote.cpanel.host:2087'
+	config.user = 'root'
+	config.password = 'assword'
+	config.logger = Logger.new($stderr)
+	config.call_type = :json
+	#config.access_hash = open('/root/.accesshash').read
+end
+
+# The call interface is as following:
+#   CPanelHelper::API.*function_name*(*:parameter1* => *value1*, *:parameter2* => *value2*, ...)
+# For "adjusted" functions, see their respective invokation documentation
+
+# retrieve available funcs
+resp = CPanelHelper::API.applist
+available_funcs = resp['app']
+
+# search accounts by domain. (This is an "adjusted" function)
+accounts = CPanelHelper::API.listaccts('domain', 'somedomain.com')
+
+Note that CPanelHelper::API functions raise CallError on any critical error.
+
+== Invoking "local" CPanel functions
+
+Please note that CPanelHelper::Local functions require access to CPanel data files, thus these calls are invoked only locally.
+
