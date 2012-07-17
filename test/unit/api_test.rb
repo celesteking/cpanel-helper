@@ -4,7 +4,7 @@ require File.expand_path('../../test_helper', __FILE__)
 require 'pp'
 require 'logger'
 
-CPanelHelper::API.configure do |config|
+CPanelHelper.configure do |config|
 	config.uri_host = 'https://172.20.0.15:2087'
 	config.user = 'root'
 	config.password = 'test15'
@@ -32,11 +32,11 @@ class ExternalAPITest < Test::Unit::TestCase
 
 		should 'error out on wrong function name or params' do
 			# wrong call
-			assert_raise RuntimeError do
+			assert_raise CPanelHelper::CallError do
 				accounts = CPanelHelper::API.doesntexist(:blah => 'sdf', :bloh => '234324')
 			end
 
-			assert_raise RuntimeError do
+			assert_raise CPanelHelper::CallError do
 				CPanelHelper::API.limitbw('doesntexist', 30000)
 			end
 		end
@@ -53,12 +53,12 @@ class ExternalAPITest < Test::Unit::TestCase
 
 		should 'error out on wrong function name or params' do
 			# wrong func name
-			assert_raise RuntimeError do
+			assert_raise CPanelHelper::CallError do
 				CPanelHelper::API.call_internal('bigbang@DnsLookup::doesntexist')
 			end
 
 			# wrong params
-			assert_raise(RuntimeError) do
+			assert_raise CPanelHelper::CallError do
 				CPanelHelper::API.call_internal('bigbang@SubDomain::delsubdomain', :length => 'shithappens')
 			end
 		end

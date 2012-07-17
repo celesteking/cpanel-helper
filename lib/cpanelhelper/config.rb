@@ -26,6 +26,8 @@ module CPanelHelper
 		def initialize
 			@cpanel_domain_data_file = '/etc/userdatadomains'
 			@cpanel_user_data_dir    = '/var/cpanel/users'
+
+			@call_type = :json
 		end
 	end
 end
