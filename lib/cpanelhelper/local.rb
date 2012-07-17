@@ -44,13 +44,13 @@ module CPanelHelper
 			end
 
 			# Get dominfo by user
-			# @param [String] user
+			# @param [String, NilClass] user Username or omit if you want all domain info to be returned
 			# @return [Hash] Hash of dominfo values keyed by domain name
-			def get_dominfo_by_user(user)
-				info = { }
+			def get_dominfo_by_user(user = nil)
+				info = {}
 				traverse_text_file(domain_data_file) do |line|
 					dominfo = parse_domain_data_line(line)
-					info[dominfo[:domain]] = dominfo if dominfo[:user] == user
+					info[dominfo[:domain]] = dominfo if user.nil? or dominfo[:user] == user
 				end
 
 				info

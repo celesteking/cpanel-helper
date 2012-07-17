@@ -3,11 +3,10 @@ module CPanelHelper
 	module API
 		# Implements some adjustments / alternations to called functions and their results
 		module AdjustedFunctions
-			# displays pertinent information about a specific account.
-			# @param [Hash] args
-			# @option args [String] user Username associated with the acount you wish to display.
-			def accountsummary(*args)
-				result = call_api(__method__, *args)
+			# Displays pertinent information about a specific account.
+			# @param [String] user Username associated with the acount you wish to display.
+			def accountsummary(user)
+				result = call_api(__method__, user)
 
 				raise(RuntimeError, log_err_prefix + result['statusmsg']) if result['status'].nil? or result['status'] != 1
 
@@ -15,11 +14,10 @@ module CPanelHelper
 			end
 
 			#
-			def editquota(*args)
-				args = args.extract_options!
-				debug "Setting quota for #{args[:user]} to #{args[:quota]} MB."
+			def editquota(user, quota)
+				debug "Setting quota for #{user} to #{quota} MB."
 
-				result = call_api(__method__, args)
+				result = call_api(__method__, :user => user, :quota => quota)
 
 				raise(RuntimeError, log_err_prefix + result['output']) unless (result['result'][0]['status'] rescue nil)
 				result['output']
