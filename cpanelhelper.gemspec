@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ruby-debug'
   s.add_development_dependency 'shoulda-context'
 
-  s.add_runtime_dependency 'json'
   s.add_runtime_dependency 'activesupport', '>= 3.0.8'
+
+	s.requirements << 'Any JSON implementation that works by require "json"'
+  s.requirements << 'ActiveSupport 3.x from Rails'
 end

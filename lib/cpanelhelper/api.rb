@@ -1,5 +1,5 @@
 
-require 'json'
+require 'cpanelhelper/core_ext/want-json'
 require 'yaml'
 
 require 'uri'
