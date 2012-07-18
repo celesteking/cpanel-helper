@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'ruby-debug'
   s.add_development_dependency 'shoulda-context'
+  s.add_development_dependency 'yard'
 
   s.add_runtime_dependency 'activesupport', '>= 3.0.8'
 
