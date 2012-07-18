@@ -51,10 +51,12 @@ module CPanelHelper
 
 			#
 			def suspendacct(user, reason = nil)
-				reason ||= '[empty]'
-				reason = URI.escape(reason)
+				reason = URI.escape(reason) if reason
 
-				result = call_api(__method__, :user => user, :reason => reason)
+				opts = {:user => user}
+				opts.update(:reason => reason) if reason and not reason.strip.empty?
+
+				result = call_api(__method__, opts)
 
 				raise(RuntimeError, log_err_prefix + result['result'][0]['statusmsg']) if (result['result'][0]['status'] != 1 rescue true)
 
