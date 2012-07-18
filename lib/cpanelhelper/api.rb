@@ -25,6 +25,7 @@ module CPanelHelper
 			# Call internal CPanel function.
 			# @param [String] function_thunk Function name, format: username@ModuleName::function
 			# @param [Hash] args Function arguments
+			# @return [Hash, Array<Hash>] Either resultset or array of resultset.
 			def call_internal(function_thunk, *args)
 				args = args.extract_options!
 
@@ -46,7 +47,8 @@ module CPanelHelper
 					raise(CallError, error_string)
 				end
 
-				[reply['cpanelresult']['data']].flatten.first
+				results = [reply['cpanelresult']['data']].flatten
+				results.size == 1 ? results.first : results
 			end
 
 			# Call CPanel JSON/XMLAPI function
