@@ -21,7 +21,7 @@ module CPanelHelper
 				begin
 					user_data_str = File.open(user_data_file).read
 					user_data     = Hash[user_data_str.scan(/^([^=#\s]+)=(.*)$/).map { |e| [e[0].downcase, e[1]] }]
-				rescue Errno::ENOENT, Errno::EACCES => e
+				rescue Errno::ENOENT, Errno::EACCES
 					raise(NotFoundError, "Username #{user} not found")
 				end
 			end
@@ -41,6 +41,9 @@ module CPanelHelper
 				end
 
 				info
+
+			rescue Errno::ENOENT, Errno::EACCES => exc
+				raise(NotFoundError, exc)
 			end
 
 			# Get dominfo by user
@@ -54,6 +57,9 @@ module CPanelHelper
 				end
 
 				info
+
+			rescue Errno::ENOENT, Errno::EACCES => exc
+				raise(NotFoundError, exc)
 			end
 
 			# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -79,6 +85,8 @@ module CPanelHelper
 						end
 
 				Hash[matches.collect { |userid| [userid, query] }]
+			rescue Errno::ENOENT, Errno::EACCES => exc
+				raise(NotFoundError, "Access error: #{exc.message}")
 			end
 
 			# Find accounts by domain query
@@ -111,6 +119,9 @@ module CPanelHelper
 				end
 
 				accounts
+
+			rescue Errno::ENOENT, Errno::EACCES => exc
+				raise(NotFoundError, "Access error: #{exc.message}")
 			end
 
 			# Find accounts by contact email query
@@ -143,6 +154,9 @@ module CPanelHelper
 				end
 
 				accounts
+
+			rescue Errno::ENOENT, Errno::EACCES => exc
+				raise(NotFoundError, "Access error: #{exc.message}")
 			end
 
 			# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
