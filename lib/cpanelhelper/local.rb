@@ -61,7 +61,7 @@ module CPanelHelper
         # Then, add dedicated IP information
         ipinfo = get_domain_ip_info
 
-        info.each_pair(domain, hinfo) do
+        info.each_pair do |domain, hinfo|
           hinfo[:dedicated] = true if ipinfo[domain]
         end
 			rescue Errno::ENOENT, Errno::EACCES => exc
