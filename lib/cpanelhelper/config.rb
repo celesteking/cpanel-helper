@@ -22,10 +22,18 @@ module CPanelHelper
 
 		attr_accessor :cpanel_user_data_dir
 
+		attr_reader :cpanel_mkaccesshash_exe
+
+		# installed SSL certs DB file
+		attr_accessor :ssl_certs_db
+
 		# Set default values
 		def initialize
 			@cpanel_domain_data_file = '/etc/userdatadomains'
+      @cpanel_domain_ips_file  = '/etc/domainips'
 			@cpanel_user_data_dir    = '/var/cpanel/users'
+			@cpanel_mkaccesshash_exe = '/usr/local/cpanel/bin/mkaccesshash'
+			@ssl_certs_db            = '/var/cpanel/ssl/installed/ssl.db'
 
 			@call_type = :json
 		end

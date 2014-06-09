@@ -4,7 +4,8 @@ require 'active_support/core_ext/date_time/conversions'
 
 require 'cpanelhelper/logger_shim'
 require 'cpanelhelper/config'
-
+require 'etc'
+require 'yaml'
 
 module CPanelHelper
 	# Deals with local functions invoked on local server. Requires access to _/var/cpanel_ and _/etc_ dir.
@@ -48,16 +49,21 @@ module CPanelHelper
 
 			# Get dominfo by user
 			# @param [String, NilClass] user Username or omit if you want all domain info to be returned
-			# @return [Hash] Hash of dominfo values keyed by domain name
+			# @return [Hash] Hash of dominfo values keyed by domain name. Plus
 			def get_dominfo_by_user(user = nil)
 				info = {}
+        # First, get info from userdatadomains file (main info)
 				traverse_text_file(domain_data_file) do |line|
 					dominfo = parse_domain_data_line(line)
 					info[dominfo[:domain]] = dominfo if user.nil? or dominfo[:user] == user
-				end
+        end
 
-				info
+        # Then, add dedicated IP information
+        ipinfo = get_domain_ip_info
 
+        info.each_pair(domain, hinfo) do
+          hinfo[:dedicated] = true if ipinfo[domain]
+        end
 			rescue Errno::ENOENT, Errno::EACCES => exc
 				raise(NotFoundError, exc)
 			end
@@ -160,6 +166,32 @@ module CPanelHelper
 			end
 
 			# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			# Output information for installed SSL certs
+			# @param [String,Regexp] filter domain filter string
+			# @return [Array<Hash{String => String}>] Array of Hash with keys `created, domains, id, is_self_signed, issuer.commonName, issuer.organizationName, issuer_text, modulus, modulus_length, not_after, not_before, owner, subject.commonName`
+			def get_installed_certificates(filter = nil)
+				certs_db_file = config.ssl_certs_db
+				raise(NotFoundError, "Access error: #{certs_db_file} unreadable") unless File.readable?(certs_db_file)
+
+				certinfo_box = YAML.load_file(certs_db_file)
+				raise(NotFoundError, 'No certificates returned') if certinfo_box.nil? or certinfo_box.empty?
+
+				certdata = []
+				certinfo_box['installed_certificates'].values.uniq.each do |cert_id|
+					ci = certinfo_box['files']['certificate'][cert_id].dup
+
+					next if filter and ci['domains'].grep(filter).empty? # skip if filter supplied and no matches
+					ci['not_after'] =  Time.at(ci['not_after'].to_i).utc
+					ci['not_before'] =  Time.at(ci['not_before'].to_i).utc
+					ci['crt_path'] = File.join(File.dirname(certs_db_file), 'certs', "#{ci['id']}.crt")
+					ci['owner'] = ci['owner'].keys.first
+					certdata << ci
+				end
+
+				certdata
+			end
+
+			# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 			# Parses domain data line into Hash
 			# @example
@@ -180,12 +212,35 @@ module CPanelHelper
 				info
 			end
 
+			# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			# Create WHM API access hash
+			def create_access_hash(recreate = false)
+				pwent = Etc.getpwuid(Process.euid)
+				access_hash_file = File.join(pwent.dir, '.accesshash')
+
+				unless File.exist?(access_hash_file) and not recreate
+					ENV.update('REMOTE_USER' => pwent.name) unless ENV.has_key?('REMOTE_USER')
+					output = %x{#{config.cpanel_mkaccesshash_exe}}
+					debug("mkhash existed with #{$?.exitstatus} and returned: #{output}")
+					raise(CPanelHelper::Error, 'Error creating access hash') unless $?.success?
+				end
+
+				open(access_hash_file).read.gsub!(/[\n\s\t]+/s, '')
+			end
+
+			# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 			# iterates over all users in *user_data_dir*
 			def for_all_cpanel_users(&block)
 				Dir.foreach(user_data_dir) do |filename|
 					next if filename == '.' or filename == '..'
 					block.call(filename)
 				end
+			end
+
+			protected
+			def logger
+				config.logger
 			end
 
 			private
@@ -203,12 +258,31 @@ module CPanelHelper
 				end
 			end
 
+      def get_domain_ip_info
+        hash = {}
+        traverse_text_file(domain_ips_file) do |line|
+          next if line =~ /^#/
+          ip, dom = line.split(/[:\s]+/)
+          hash[dom] = ip
+        end
+
+        hash
+      end
+
 			def user_data_dir
 				CPanelHelper.config.cpanel_user_data_dir
 			end
 
 			def domain_data_file
 				CPanelHelper.config.cpanel_domain_data_file
+      end
+
+      def domain_ips_file
+        CPanelHelper.config.cpanel_domain_ips_file
+      end
+
+			def config
+				CPanelHelper.config
 			end
 		end
 	end

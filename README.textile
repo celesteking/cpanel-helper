@@ -31,3 +31,18 @@ p. Note that @CPanelHelper::API@ functions raise @CallError@ on any critical err
 h2. Invoking "local" CPanel functions
 
 Please note that @CPanelHelper::Local@ functions require access to CPanel data files, thus these calls are invoked only locally.
+
+It's possible to create access hash by invoking @CPanelHelper::Local.create_access_hash@ method before doing
+any local API calls. Be careful as this method will echo back the hash.
+
+h2. Changelog
+
+h3. 0.2.5
+* @get_dominfo_by_user@ now returns whether main domain is on dedicated IP
+
+h3. 0.2.2
+* bugfix in @get_installed_certificates@
+
+h3. 0.2.1
+
+* Added @get_installed_certificates@ function that returns installed certs
