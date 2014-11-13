@@ -278,7 +278,7 @@ module CPanelHelper
         domains = []
         traverse_text_file(CPanelHelper.config.cpanel_remote_domains_file) do |line|
           next if line =~ /^#/
-          domains << line
+          domains << line.strip
         end
 
         domains
