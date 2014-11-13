@@ -51,7 +51,7 @@ module CPanelHelper
 			# @param [String, NilClass] user Username or omit if you want all domain info to be returned
       # @param [Boolean, NilClass] want_mail_info Include local/remote domain information in result?
 			# @return [Hash] Hash of dominfo values keyed by domain name. Plus
-			def get_dominfo_by_user(user = nil, want_mail_info = nil)
+			def get_dominfo_by_user(user = nil, want_mail_info = false)
 				info = {}
         # First, get info from userdatadomains file (main info)
 				traverse_text_file(domain_data_file) do |line|
@@ -63,11 +63,11 @@ module CPanelHelper
         ipinfo = get_domain_ip_info
 
         # Get remote_mx_domains
-        remote_mx_domains = get_remote_domains
+        remote_mx_domains = want_mail_info ? get_remote_domains : []
 
         info.each_pair do |domain, hinfo|
           hinfo[:dedicated] = true if ipinfo[domain]
-          hinfo[:remote_mx] = true if remote_mx_domains.include?(domain)
+          hinfo[:remote_mx] = true if want_mail_info and remote_mx_domains.include?(domain)
         end
 			rescue Errno::ENOENT, Errno::EACCES => exc
 				raise(NotFoundError, exc)
