@@ -2,6 +2,6 @@
 .bundle
 Gemfile.lock
 pkg/*
-.idea/*
+.idea
 .yardoc
-doc/
+doc

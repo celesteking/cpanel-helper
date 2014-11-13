@@ -22,6 +22,8 @@ module CPanelHelper
 
     attr_accessor :cpanel_domain_ips_file
 
+    attr_accessor :cpanel_remote_domains_file
+
     attr_accessor :cpanel_user_data_dir
 
     attr_reader :cpanel_mkaccesshash_exe
