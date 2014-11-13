@@ -33,6 +33,7 @@ module CPanelHelper
     def initialize
       @cpanel_domain_data_file = '/etc/userdatadomains'
       @cpanel_domain_ips_file  = '/etc/domainips'
+      @cpanel_remote_domains_file = '/etc/remotedomains'
       @cpanel_user_data_dir    = '/var/cpanel/users'
       @cpanel_mkaccesshash_exe = '/usr/local/cpanel/bin/mkaccesshash'
       @ssl_certs_db            = '/var/cpanel/ssl/installed/ssl.db'

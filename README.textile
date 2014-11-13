@@ -37,6 +37,9 @@ any local API calls. Be careful as this method will echo back the hash.
 
 h2. Changelog
 
+h3. 0.3.1
+* @get_dominfo_by_user@ now able to retrieve remote_mx information if it's told to
+
 h3. 0.2.5
 * @get_dominfo_by_user@ now returns whether main domain is on dedicated IP
 

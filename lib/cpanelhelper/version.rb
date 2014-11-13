@@ -2,8 +2,8 @@
 module CPanelHelper
 	module Version
 		MAJOR = 0
-		MINOR = 2
-		RELEASE = 5
+		MINOR = 3
+		RELEASE = 1
 
 		AUTHORS = {
 				'Yuri Arabadji' => [2012, 2013, 2014]

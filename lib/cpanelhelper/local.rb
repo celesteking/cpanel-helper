@@ -49,8 +49,9 @@ module CPanelHelper
 
 			# Get dominfo by user
 			# @param [String, NilClass] user Username or omit if you want all domain info to be returned
+      # @param [Boolean, NilClass] want_mail_info Include local/remote domain information in result?
 			# @return [Hash] Hash of dominfo values keyed by domain name. Plus
-			def get_dominfo_by_user(user = nil)
+			def get_dominfo_by_user(user = nil, want_mail_info = nil)
 				info = {}
         # First, get info from userdatadomains file (main info)
 				traverse_text_file(domain_data_file) do |line|
@@ -61,8 +62,12 @@ module CPanelHelper
         # Then, add dedicated IP information
         ipinfo = get_domain_ip_info
 
+        # Get remote_mx_domains
+        remote_mx_domains = get_remote_domains
+
         info.each_pair do |domain, hinfo|
           hinfo[:dedicated] = true if ipinfo[domain]
+          hinfo[:remote_mx] = true if remote_mx_domains.include?(domain)
         end
 			rescue Errno::ENOENT, Errno::EACCES => exc
 				raise(NotFoundError, exc)
@@ -267,6 +272,16 @@ module CPanelHelper
         end
 
         hash
+      end
+
+      def get_remote_domains
+        domains = []
+        traverse_text_file(CPanelHelper.config.cpanel_remote_domains_file) do |line|
+          next if line =~ /^#/
+          domains << line
+        end
+
+        domains
       end
 
 			def user_data_dir
