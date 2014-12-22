@@ -12,8 +12,10 @@ CPanelHelper.configure do |config|
 	config.password = 'assword'
 	config.logger = Logger.new($stderr)
 	config.call_type = :json
-	#config.access_hash = open('/root/.accesshash').read
+	#config.access_hash = open('/root/.accesshash').read # or better use chunk below
 end
+
+# CPanelHelper::API.load_api_key
 
 # The call interface is as following:
 #   CPanelHelper::API.*function_name*(*:parameter1* => *value1*, *:parameter2* => *value2*, ...)
@@ -36,6 +38,10 @@ It's possible to create access hash by invoking @CPanelHelper::Local.create_acce
 any local API calls. Be careful as this method will echo back the hash.
 
 h2. Changelog
+
+h3. 0.3.2
+* show proper way of setting access hash
+* reformat the code
 
 h3. 0.3.1
 * @get_dominfo_by_user@ now able to retrieve remote_mx information if it's told to
