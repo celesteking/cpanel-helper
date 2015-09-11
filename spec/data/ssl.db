@@ -1,0 +1,106 @@
+--- 
+files: 
+  certificate: 
+    cptest_com_92c1a_4a313_1380132779_52179bdd8e35ef98fff4541076bcad23: 
+      created: '1377540812'
+      domains: 
+        - cptest.com
+      id: cptest_com_92c1a_4a313_1380132779_52179bdd8e35ef98fff4541076bcad23
+      is_self_signed: 1
+      issuer.commonName: cptest.com
+      issuer.organizationName: Fused
+      issuer_text: "0.9.2342.19200300.100.1.1\nsomeuser\ncountryName\nUK\nstateOrProvinceName\nBig city\norganizationName\nFused\norganizationalUnitName\nIT\ncommonName\ncptest.com"
+      modulus: 92c1a24ea0388cb0cc0beece8d8de5a24723753cb1e3c8c7be23a26cfdafe4cebfd05c7a59d83d3e1c65d289f119d839942da80d1c929a1b3972cffdfb3804292d4a075d4663786acd1c4efe63bc9bcf8a2d018c6cce19ddaaa2748af5f2846cadb940acd9f75c694031ba8d177f8fc2a903e38a3a7e0204819aaedfbef7fb1032c01aa84d92731b4cbf38e43d703a55d770b0da122b144091960d3ef7a92e4ea9e82bd0e05ebdfa04dc3c8fedb011ea167f9d0261d101d78984b2c5d04625e57dfa74463ddebd03b9fd84431ebf86322a69b77363b52a95cacec730e978b3f12b5f556e932603ecc74be94bae8c723d2a28381a1a70c76c6ccee7bc6134a313
+      modulus_length: 2048
+      not_after: '1380132779'
+      not_before: '1377540779'
+      owner: 
+        ssl2: ~
+      subject.commonName: cptest.com
+    ssl1_cp2_test_fused_net_cec40_330a5_1328796854_af8c492264f2d021295711b56eaf92ea: 
+      created: '1370934266'
+      domains: 
+        - ssl1.cp2.test.fused.net
+      id: ssl1_cp2_test_fused_net_cec40_330a5_1328796854_af8c492264f2d021295711b56eaf92ea
+      is_self_signed: 0
+      issuer.commonName: Solid CA
+      issuer.organizationName: Scam providers ltd
+      issuer_text: "countryName\nRU\nstateOrProvinceName\nOklaHoma\nlocalityName\nKukuruza\norganizationName\nScam providers ltd\ncommonName\nSolid CA"
+      modulus: cec40274c4b3e76f0541f4fb0bd1a5acbf98e18495e73a04398b3d8cfa5120e4be4a3136b5a4068e2e4b385ac087aa52b25b361406ea2aab4d23b1be0b157277c57dbc82893c0238e893b8b295fe9c6e0dc882b35a765d03cb0e671b029f53ed968af77c7d88ae5f4be94943cb033eba701aa0581eb194e7b93d0018b3fa92f1c30019d3b815621e199826c234f08fc321916cf0d0ac93de8a6bcbd91de62a7f02b05291b3145636cdaba4a7ba128ec4817f37b2286d646b714dd64c68cdbd0b5e1e5814413ed8e48c15c42d3ce5bd63062a47ebe1e1724532ab75d98bd68eaa3c78caee6e551aaa4ba507621be010847682cf2cab1e5cf806b48085c81330a5
+      modulus_length: 2048
+      not_after: '1328796854'
+      not_before: '1328639002'
+      owner: 
+        ssl1: ~
+      subject.commonName: ssl1.cp2.test.fused.net
+    stage2_i_fused_net_92c1a_4a313_1380133984_79d38fb3b8dc599b0ebcba7cd8a7fb25: 
+      created: '1377542024'
+      domains: 
+        - stage2.i.fused.net
+      id: stage2_i_fused_net_92c1a_4a313_1380133984_79d38fb3b8dc599b0ebcba7cd8a7fb25
+      is_self_signed: 1
+      issuer.commonName: stage2.i.fused.net
+      issuer.organizationName: Testorg
+      issuer_text: "commonName\nstage2.i.fused.net\norganizationName\nTestorg"
+      modulus: 92c1a24ea0388cb0cc0beece8d8de5a24723753cb1e3c8c7be23a26cfdafe4cebfd05c7a59d83d3e1c65d289f119d839942da80d1c929a1b3972cffdfb3804292d4a075d4663786acd1c4efe63bc9bcf8a2d018c6cce19ddaaa2748af5f2846cadb940acd9f75c694031ba8d177f8fc2a903e38a3a7e0204819aaedfbef7fb1032c01aa84d92731b4cbf38e43d703a55d770b0da122b144091960d3ef7a92e4ea9e82bd0e05ebdfa04dc3c8fedb011ea167f9d0261d101d78984b2c5d04625e57dfa74463ddebd03b9fd84431ebf86322a69b77363b52a95cacec730e978b3f12b5f556e932603ecc74be94bae8c723d2a28381a1a70c76c6ccee7bc6134a313
+      modulus_length: 2048
+      not_after: '1380133984'
+      not_before: '1377541984'
+      owner: 
+        nobody: ~
+      subject.commonName: stage2.i.fused.net
+  key: 
+    92c1a_4a313_302624804a713e1aea1c1aeb33043db9: 
+      created: '1377540110'
+      id: 92c1a_4a313_302624804a713e1aea1c1aeb33043db9
+      modulus: 92c1a24ea0388cb0cc0beece8d8de5a24723753cb1e3c8c7be23a26cfdafe4cebfd05c7a59d83d3e1c65d289f119d839942da80d1c929a1b3972cffdfb3804292d4a075d4663786acd1c4efe63bc9bcf8a2d018c6cce19ddaaa2748af5f2846cadb940acd9f75c694031ba8d177f8fc2a903e38a3a7e0204819aaedfbef7fb1032c01aa84d92731b4cbf38e43d703a55d770b0da122b144091960d3ef7a92e4ea9e82bd0e05ebdfa04dc3c8fedb011ea167f9d0261d101d78984b2c5d04625e57dfa74463ddebd03b9fd84431ebf86322a69b77363b52a95cacec730e978b3f12b5f556e932603ecc74be94bae8c723d2a28381a1a70c76c6ccee7bc6134a313
+      modulus_length: 2048
+      owner: 
+        nobody: ~
+        ssl2: ~
+    cec40_330a5_854b79f2832105ad43cba3cfd0fb7f0f: 
+      created: '1370934266'
+      id: cec40_330a5_854b79f2832105ad43cba3cfd0fb7f0f
+      modulus: cec40274c4b3e76f0541f4fb0bd1a5acbf98e18495e73a04398b3d8cfa5120e4be4a3136b5a4068e2e4b385ac087aa52b25b361406ea2aab4d23b1be0b157277c57dbc82893c0238e893b8b295fe9c6e0dc882b35a765d03cb0e671b029f53ed968af77c7d88ae5f4be94943cb033eba701aa0581eb194e7b93d0018b3fa92f1c30019d3b815621e199826c234f08fc321916cf0d0ac93de8a6bcbd91de62a7f02b05291b3145636cdaba4a7ba128ec4817f37b2286d646b714dd64c68cdbd0b5e1e5814413ed8e48c15c42d3ce5bd63062a47ebe1e1724532ab75d98bd68eaa3c78caee6e551aaa4ba507621be010847682cf2cab1e5cf806b48085c81330a5
+      modulus_length: 2048
+      owner: 
+        ssl1: ~
+indexes: 
+  certificate: 
+    modulus: 
+      92c1a24ea0388cb0cc0beece8d8de5a24723753cb1e3c8c7be23a26cfdafe4cebfd05c7a59d83d3e1c65d289f119d839942da80d1c929a1b3972cffdfb3804292d4a075d4663786acd1c4efe63bc9bcf8a2d018c6cce19ddaaa2748af5f2846cadb940acd9f75c694031ba8d177f8fc2a903e38a3a7e0204819aaedfbef7fb1032c01aa84d92731b4cbf38e43d703a55d770b0da122b144091960d3ef7a92e4ea9e82bd0e05ebdfa04dc3c8fedb011ea167f9d0261d101d78984b2c5d04625e57dfa74463ddebd03b9fd84431ebf86322a69b77363b52a95cacec730e978b3f12b5f556e932603ecc74be94bae8c723d2a28381a1a70c76c6ccee7bc6134a313: 
+        cptest_com_92c1a_4a313_1380132779_52179bdd8e35ef98fff4541076bcad23: ~
+        stage2_i_fused_net_92c1a_4a313_1380133984_79d38fb3b8dc599b0ebcba7cd8a7fb25: ~
+      cec40274c4b3e76f0541f4fb0bd1a5acbf98e18495e73a04398b3d8cfa5120e4be4a3136b5a4068e2e4b385ac087aa52b25b361406ea2aab4d23b1be0b157277c57dbc82893c0238e893b8b295fe9c6e0dc882b35a765d03cb0e671b029f53ed968af77c7d88ae5f4be94943cb033eba701aa0581eb194e7b93d0018b3fa92f1c30019d3b815621e199826c234f08fc321916cf0d0ac93de8a6bcbd91de62a7f02b05291b3145636cdaba4a7ba128ec4817f37b2286d646b714dd64c68cdbd0b5e1e5814413ed8e48c15c42d3ce5bd63062a47ebe1e1724532ab75d98bd68eaa3c78caee6e551aaa4ba507621be010847682cf2cab1e5cf806b48085c81330a5: 
+        ssl1_cp2_test_fused_net_cec40_330a5_1328796854_af8c492264f2d021295711b56eaf92ea: ~
+    owner: 
+      nobody: 
+        stage2_i_fused_net_92c1a_4a313_1380133984_79d38fb3b8dc599b0ebcba7cd8a7fb25: ~
+      ssl1: 
+        ssl1_cp2_test_fused_net_cec40_330a5_1328796854_af8c492264f2d021295711b56eaf92ea: ~
+      ssl2: 
+        cptest_com_92c1a_4a313_1380132779_52179bdd8e35ef98fff4541076bcad23: ~
+    subject.commonName: 
+      cptest.com: 
+        cptest_com_92c1a_4a313_1380132779_52179bdd8e35ef98fff4541076bcad23: ~
+      ssl1.cp2.test.fused.net: 
+        ssl1_cp2_test_fused_net_cec40_330a5_1328796854_af8c492264f2d021295711b56eaf92ea: ~
+      stage2.i.fused.net: 
+        stage2_i_fused_net_92c1a_4a313_1380133984_79d38fb3b8dc599b0ebcba7cd8a7fb25: ~
+  key: 
+    owner: 
+      nobody: 
+        92c1a_4a313_302624804a713e1aea1c1aeb33043db9: ~
+      ssl1: 
+        cec40_330a5_854b79f2832105ad43cba3cfd0fb7f0f: ~
+      ssl2: 
+        92c1a_4a313_302624804a713e1aea1c1aeb33043db9: ~
+installed_certificates: 
+  ssl1.cp2.test.fused.net: ssl1_cp2_test_fused_net_cec40_330a5_1328796854_af8c492264f2d021295711b56eaf92ea
+  ssl2.cp2.test.fused.net: cptest_com_92c1a_4a313_1380132779_52179bdd8e35ef98fff4541076bcad23
+  stage2.i.fused.net: stage2_i_fused_net_92c1a_4a313_1380133984_79d38fb3b8dc599b0ebcba7cd8a7fb25
+uniques: 
+  key: 
+    modulus: 
+      92c1a24ea0388cb0cc0beece8d8de5a24723753cb1e3c8c7be23a26cfdafe4cebfd05c7a59d83d3e1c65d289f119d839942da80d1c929a1b3972cffdfb3804292d4a075d4663786acd1c4efe63bc9bcf8a2d018c6cce19ddaaa2748af5f2846cadb940acd9f75c694031ba8d177f8fc2a903e38a3a7e0204819aaedfbef7fb1032c01aa84d92731b4cbf38e43d703a55d770b0da122b144091960d3ef7a92e4ea9e82bd0e05ebdfa04dc3c8fedb011ea167f9d0261d101d78984b2c5d04625e57dfa74463ddebd03b9fd84431ebf86322a69b77363b52a95cacec730e978b3f12b5f556e932603ecc74be94bae8c723d2a28381a1a70c76c6ccee7bc6134a313: 92c1a_4a313_302624804a713e1aea1c1aeb33043db9
+      cec40274c4b3e76f0541f4fb0bd1a5acbf98e18495e73a04398b3d8cfa5120e4be4a3136b5a4068e2e4b385ac087aa52b25b361406ea2aab4d23b1be0b157277c57dbc82893c0238e893b8b295fe9c6e0dc882b35a765d03cb0e671b029f53ed968af77c7d88ae5f4be94943cb033eba701aa0581eb194e7b93d0018b3fa92f1c30019d3b815621e199826c234f08fc321916cf0d0ac93de8a6bcbd91de62a7f02b05291b3145636cdaba4a7ba128ec4817f37b2286d646b714dd64c68cdbd0b5e1e5814413ed8e48c15c42d3ce5bd63062a47ebe1e1724532ab75d98bd68eaa3c78caee6e551aaa4ba507621be010847682cf2cab1e5cf806b48085c81330a5: cec40_330a5_854b79f2832105ad43cba3cfd0fb7f0f
