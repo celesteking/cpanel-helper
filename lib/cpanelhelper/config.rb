@@ -26,7 +26,7 @@ module CPanelHelper
 
     attr_accessor :cpanel_user_data_dir
 
-    attr_reader :cpanel_mkaccesshash_exe
+    attr_reader :cpanel_mkaccesshash_exe, :cpanel_suspended_dir
 
     # installed SSL certs DB file
     attr_accessor :ssl_certs_db
@@ -37,6 +37,7 @@ module CPanelHelper
       @cpanel_domain_ips_file     = '/etc/domainips'
       @cpanel_remote_domains_file = '/etc/remotedomains'
       @cpanel_user_data_dir       = '/var/cpanel/users'
+      @cpanel_suspended_dir       = '/var/cpanel/suspended'
       @cpanel_mkaccesshash_exe    = '/usr/local/cpanel/bin/mkaccesshash'
       @ssl_certs_db               = '/var/cpanel/ssl/installed/ssl.db'
 

@@ -170,6 +170,12 @@ module CPanelHelper
       end
 
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      # @return [Array<String>] list of suspended users
+      def get_suspended_users
+        Dir.entries(CPanelHelper.config.cpanel_suspended_dir).reject{ |fn| %w(. ..).include?(fn) }
+      end
+
+      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       # Output information for installed SSL certs
       # @param [String,Regexp] filter domain filter string
       # @return [Array<Hash{String => String}>] Array of Hash with keys `created, domains, id, is_self_signed, issuer.commonName, issuer.organizationName, issuer_text, modulus, modulus_length, not_after, not_before, owner, subject.commonName`

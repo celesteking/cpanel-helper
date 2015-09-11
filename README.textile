@@ -39,6 +39,9 @@ any local API calls. Be careful as this method will echo back the hash.
 
 h2. Changelog
 
+h3. 0.3.3
+* introduce @CPanelHelper::Local.get_suspended_users@
+
 h3. 0.3.2
 * show proper way of setting access hash
 * reformat the code
