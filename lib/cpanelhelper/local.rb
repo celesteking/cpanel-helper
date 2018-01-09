@@ -69,7 +69,8 @@ module CPanelHelper
           hinfo[:remote_mx] = true if want_mail_info and remote_mx_domains.include?(domain)
         end
       rescue Errno::ENOENT, Errno::EACCES => exc
-        raise(NotFoundError, exc)
+        debug("Error during retrieval (no domains?): #{exc}")
+        {}
       end
 
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -173,6 +174,8 @@ module CPanelHelper
       # @return [Array<String>] list of suspended users
       def get_suspended_users
         Dir.entries(CPanelHelper.config.cpanel_suspended_dir).reject{ |fn| %w(. ..).include?(fn) }
+      rescue Errno::ENOENT
+        []
       end
 
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
