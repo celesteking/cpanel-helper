@@ -1,21 +1,26 @@
 
-require 'rspec/core/rake_task'
-require 'yard'
 require 'erb'
 require 'rubygems/package_task'
-
-require 'cpanelhelper/version'
 
 @gemname = 'rbenv-rubygem-cpanel-helper'
 @specfile = "#{@gemname}.spec"
 
-YARD::Rake::YardocTask.new do |t|
-  t.files   = ['lib/**/*.rb']
+begin
+  require 'yard'
+  YARD::Rake::YardocTask.new do |t|
+    t.files   = ['lib/**/*.rb']
+  end
+rescue LoadError
 end
 
-RSpec::Core::RakeTask.new(:spec)
+begin
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec)
+rescue LoadError
+end
 
-Gem::PackageTask.new(Gem::Specification.load(Dir.glob('*.gemspec').first)) {}
+spec = Gem::Specification.load(Dir.glob('*.gemspec').first)
+Gem::PackageTask.new(spec) {}
 
 desc 'Build SRPM'
 task srpm: [:gem, :template_spec] do |t|
@@ -26,7 +31,7 @@ end
 task :template_spec do
   spectempl = "#{@specfile}.in"
 
-  gem_version = CPanelHelper::Version.string
+  gem_version = spec.version
   ruby_version = RUBY_VERSION
 
   erb = ERB.new(File.read(spectempl))
