@@ -1,8 +1,8 @@
 
-require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'yard'
 require 'erb'
+require 'rubygems/package_task'
 
 require 'cpanelhelper/version'
 
@@ -15,8 +15,10 @@ end
 
 RSpec::Core::RakeTask.new(:spec)
 
+Gem::PackageTask.new(Gem::Specification.load(Dir.glob('*.gemspec').first)) {}
+
 desc 'Build SRPM'
-task srpm: [:build, :template_spec] do |t|
+task srpm: [:gem, :template_spec] do |t|
   sh "rpmbuild -bs -D '_sourcedir #{Dir.pwd}/pkg' -D '_srcrpmdir #{Dir.pwd}/pkg' #{@specfile}"
   $?.success? || raise('Failure building SRPM')
 end
