@@ -43,7 +43,7 @@ BuildRequires:	rbenv-ruby = %{ruby_version}
 Requires:	      rbenv-ruby = %{ruby_version}
 
 Requires:	      rbenv >= 1.1.1
-Requires:	      rbenv-rubygem(activesupport) >= 3.22.2.5
+Requires:	      rbenv-rubygem(activesupport) >= 3.2.22.5
 
 Provides:       rbenv-rubygem(%{gemname}) = %{version}
 
