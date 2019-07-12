@@ -80,6 +80,7 @@ module CPanelHelper
       # @param [String] matchtype One of 'exact', 'partial', 'regexp'
       # @return [Hash{String: String] Hash of usernames as keys with supplied query string as values
       def find_accounts_by_string(query, matchtype = 'exact')
+        raise ArgumentError, 'wrong query' unless query.length > 0
         matches =
             case matchtype
               when 'partial'
@@ -105,6 +106,7 @@ module CPanelHelper
       # @param [String] matchtype One of 'exact', 'partial', 'regexp'
       # @return [Hash{Symbol: Array<String>] Values of (Array of domain names) keyed by username
       def find_accounts_by_domain(query, matchtype = 'exact')
+        raise ArgumentError, 'wrong query' unless query.length > 0
         accounts = {}
 
         traverse_text_file(domain_data_file) do |line|
@@ -140,21 +142,23 @@ module CPanelHelper
       # @param [String] matchtype One of 'exact', 'partial', 'regexp'
       # @return [Hash{Symbol: Array<String>] Values of (Array of contact emails) keyed by username
       def find_accounts_by_email(query, matchtype = 'exact')
+        raise ArgumentError, 'wrong query' unless query.length > 0
         accounts = {}
 
-        for_all_cpanel_users do |userid|
+        for_all_cpanel_real_users do |userid|
           userinfo      = get_cpstore_user_info(userid)
-          email, email2 = userinfo['contactemail'], userinfo['contactemail2']
+          email  = userinfo['contactemail'] || ''
+          email2 = userinfo['contactemail2'] || ''
 
           got_match =
               case matchtype.to_s
                 when 'regexp'
-                  email.match(query) #or email2.match(query)
+                  email.match(query) or email2.match(query)
                 when 'partial'
                   query.gsub!(/(^\*|\*$)/, '')
-                  email.include?(query) #or email2.include?(query)
+                  email.include?(query) or email2.include?(query)
                 else # exact
-                  email == query #or email2 == query
+                  [email, email2].include? query
               end
 
           if got_match
@@ -248,6 +252,15 @@ module CPanelHelper
         Dir.foreach(user_data_dir) do |filename|
           next if filename == '.' or filename == '..'
           block.call(filename)
+        end
+      end
+
+      # iterates over all real users (excluding cpanel system accs)
+      # @see for_all_cpanel_users
+      def for_all_cpanel_real_users(&block)
+        for_all_cpanel_users do |user|
+          next if %w(system).include?(user)
+          block.call(user)
         end
       end
 
