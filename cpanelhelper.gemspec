@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'RedCloth'
   s.add_development_dependency 'test-unit'
 
-  s.add_runtime_dependency 'activesupport', '~> 5.0.0'
+  s.add_runtime_dependency 'activesupport', '>= 3.2.22.5'
 
   s.requirements << 'Any JSON implementation that works by require "json"'
   s.requirements << 'ActiveSupport 3.x from Rails'
