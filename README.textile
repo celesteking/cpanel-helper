@@ -39,6 +39,9 @@ any local API calls. Be careful as this method will echo back the hash.
 
 h2. Changelog
 
+h3. 0.4.1
+* Support calling UAPI functions via @CPanelHelper::API.call_uapi@
+
 h3. 0.3.3
 * introduce @CPanelHelper::Local.get_suspended_users@
 

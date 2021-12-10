@@ -28,7 +28,7 @@
 Summary:        CPanel API library proxy
 Name:           rbenv-rubygem-%{gemname}
 Version:        %{gem_version}
-Release:        3%{?dist}
+Release:        1%{?dist}
 Vendor:         %{?_host_vendor}
 License:        ASL 2.0
 Group:          System Environment/Base
@@ -102,27 +102,5 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Mon Apr 09 2018 Yuri Arabadji <yuri@fused.internal> - 0.3.3-5
-- depend on latest stable LTS AS
-
-* Fri Apr 06 2018 Yuri Arabadji <yuri@fused.internal> - 0.3.3-4
-- obsolete rubygem-cpanelhelper
-
-* Wed Jul 13 2016 Yuri Arabadji <yuri@fused.internal> - 0.3.3-3
-- ruby ver bump
-
-* Thu Nov 05 2015 Yuri Arabadji <yuri@fused.internal> - 0.3.3-2
-- ruby ver dep bump
-
-* Thu Nov 13 2014 Yuri Arabadji <yuri@fused.internal> - 0.3.1-1
-- upstream
-
-* Mon Jun 09 2014 Yuri Arabadji <yuri@fused.internal> - 0.2.2-3
-- upstream
-
-* Fri Jul 05 2013 Yuri Arabadji <yuri@fused.internal> - 0.1.2-2
-- add activesupport dep
-
-* Fri Jul 05 2013 Yuri Arabadji <yuri@fused.internal> - 0.1.2-1
-- initial build
-
+* %(env LANG=C date "+%a %b %d %Y") Yuri Arabadji <yuri@fused.internal> - %{version}-%{release}
+autobuild

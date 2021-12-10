@@ -1,11 +1,11 @@
 module CPanelHelper
   module Version
     MAJOR   = 0
-    MINOR   = 3
-    RELEASE = 5
+    MINOR   = 4
+    RELEASE = 1
 
     AUTHORS = {
-        'Yuri Arabadji' => [2012, 2013, 2014]
+        'Yuri Arabadji' => [2012, 2013, 2014, 2021]
     }
 
     def self.string

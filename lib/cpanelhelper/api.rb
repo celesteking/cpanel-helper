@@ -50,6 +50,40 @@ module CPanelHelper
         results.size == 1 ? results.first : results
       end
 
+      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      # Call a UAPI function.
+      # @param [String] user
+      # @param [String] mod
+      # @param [String] func
+      # @param [Hash] args
+      # @return [Hash, Array<Hash>] Either resultset or array of resultset.
+      def call_uapi(user, mod, func, args = {})
+
+        query_args_add = {
+            'api.version' => 1,
+            'cpanel.user' => user,
+            'cpanel.module'   => mod,
+            'cpanel.function' => func,
+        }
+
+        reply = call('uapi_cpanel', query_args_add.merge(args))
+
+        # pp reply
+        error_string =
+            if (reply['metadata']['result'] == 0 rescue 0)
+              reply['metadata']['reason'] rescue 'unknown invokation error'
+            elsif (reply['data']['uapi']['status'] == 0 rescue 0)
+              reply['data']['uapi']['errors'].join(' ✪ ') rescue 'unknown UAPI error'
+            end
+        if error_string
+          error "[API] UAPI call returned error: #{error_string}"
+          raise(CallError, error_string)
+        end
+
+        results = [reply['data']['uapi']['data']].flatten
+        results.size == 1 ? results.first : results
+      end
+
       # Call CPanel JSON/XMLAPI function
       # @param [String] function Function name
       # @param [Hash] args Function arguments
